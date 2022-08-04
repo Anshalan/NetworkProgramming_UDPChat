@@ -59,12 +59,19 @@ public class Terminal implements Runnable {
     private void handleCommand(Scanner scanner) {
         String userMessage = scanner.nextLine();
         if (userMessage.startsWith("$")) {
-            String[] messageElements = userMessage.split("[ $]");
-            if (messageElements[1].equalsIgnoreCase("changeroom")) {
-                handleChangeRoom(messageElements);
-            } else if (messageElements[1].equalsIgnoreCase("leave")) {
-                handleLeave(userMessage);
+            String[] messageElements = userMessage.replace("$", "").trim().split(" ");
+            if(messageElements.length>0){
+                if (messageElements[0].equalsIgnoreCase("changeroom")) {
+                    handleChangeRoom(messageElements);
+                } else if (messageElements[0].equalsIgnoreCase("leave")) {
+                    handleLeave(userMessage);
+                }else{
+                    System.out.println("Incorrect command");
+                }
+            }else{
+                System.out.println("Missing command");
             }
+
         } else {
             handleMessage(userMessage);
         }

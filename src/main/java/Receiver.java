@@ -86,7 +86,7 @@ public class Receiver implements Runnable {
     private void handleLeaveRoom(Message message) {
         if (user.getName() != null) {
             if (!user.getId().equals(message.getSenderId())) {
-                System.out.printf("%s User \"%s\" left room %s%n", message.getSendDate(), message.senderName, message.getRoom());
+                System.out.printf("User \"%s\" left room %s%n", message.senderName, message.getRoom());
             }
         }
     }
