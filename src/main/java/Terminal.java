@@ -79,8 +79,8 @@ public class Terminal implements Runnable {
 
     private void handleChangeRoom(String[] messageArray) {
         String userMessage;
-        Room room = Room.valueOf(messageArray[2].toUpperCase());
         try {
+            Room room = Room.valueOf(messageArray[1].toUpperCase());
             userMessage = room.name();
             Message message = new Message(user.getId(), user.getName(), MessageType.LEAVE_ROOM, LocalDateTime.now(), userMessage, user.getRoom());
             messageQueue.addMessage(message);
@@ -88,7 +88,7 @@ public class Terminal implements Runnable {
             message = new Message(user.getId(), user.getName(), MessageType.JOIN_ROOM, LocalDateTime.now(), userMessage, user.getRoom());
             messageQueue.addMessage(message);
         } catch (IllegalArgumentException e) {
-            System.out.printf("There is no room \"%s\"%n", room);
+            System.out.printf("There is no room \"%s\"%n", (messageArray[1]));
         }
     }
 
